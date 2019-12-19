@@ -5,13 +5,15 @@ import lk.ac.mrt.cse.dbs.simpleexpensemanager.data.TransactionDAO;
 import lk.ac.mrt.cse.dbs.simpleexpensemanager.data.impl.PersistentMemoryAccountDAO;
 import lk.ac.mrt.cse.dbs.simpleexpensemanager.data.impl.PersistentTransactionDAO;
 import lk.ac.mrt.cse.dbs.simpleexpensemanager.data.model.Account;
+import android.content.Context;
 
 /**
  *
  */
 public class PersistentDemoExpenseManager extends ExpenseManager {
-
-    public PersistentDemoExpenseManager() {
+    Context context;
+    public PersistentDemoExpenseManager(Context context) {
+        this.context = context;
         setup();
     }
 
@@ -19,10 +21,10 @@ public class PersistentDemoExpenseManager extends ExpenseManager {
     public void setup() {
         /*** Begin generating dummy data for In-Memory implementation ***/
 
-        TransactionDAO persistentTransactionDAO = new PersistentTransactionDAO();
+        TransactionDAO persistentTransactionDAO = new PersistentTransactionDAO(context);
         setTransactionsDAO(persistentTransactionDAO);
 
-        AccountDAO persistentAccountDAO = new PersistentAccountDAO();
+        AccountDAO persistentAccountDAO = new PersistentAccountDAO(context);
         setAccountsDAO(persistentAccountDAO);
 
         // dummy data
